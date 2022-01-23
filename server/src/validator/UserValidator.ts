@@ -20,7 +20,9 @@ const userLoginValidator=async(req,res,next)=>{
         return next()
         
     } catch (error) {
-        res.send('Error in data formate')
+        res.send({
+           message:error
+        })
         return next(error)
     }
 }

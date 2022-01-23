@@ -1,5 +1,6 @@
-import console from "console"
 import UserRegistration from "./controller/UserController"
+import userLogin from "./controller/UserSingController"
+import userSingValidator from "./validator/UserSingInValidator"
 import userLoginValidator from "./validator/UserValidator"
 
 const express = require('express')
@@ -18,14 +19,7 @@ app.post("/post", (req, res) => {
   console.log("Connected to React");
   res.redirect("/");
 });
-app.get('/register', (req, res) => {
-  try {
-    console.log('register data here')
-    res.send('Data')
-    res.end()
-  } catch (error) {
-    console.log(error)
-  }
-})
 app.post('/register',userLoginValidator,UserRegistration)
+app.post('/register/singin',userSingValidator,userLogin)
+
 export default app

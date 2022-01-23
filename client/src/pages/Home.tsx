@@ -16,23 +16,14 @@ export const Home: React.FC = () => {
     }
 
     return (
-        <div className='Home'>
-            <header className='header'>
-                <div className='bangladesh-logo'>
-                    <img alt="logo" src="http://dmc.gov.bd/themes/responsive_npf/img/logo/logo.png" width='5%' />
+        <>
+            <div className='Home'>
+
+                <div className='body'>
+                    <Button variant='contained' onClick={handleRegister} style={{ margin: "20px" }}>Create Account</Button>
+                    <Button variant='contained' onClick={handleSingin} style={{ margin: "20px" }}>Singin</Button>
                 </div>
-                <div className='bangobondhu'>
-                    <img alt='logo' src="https://www.bsmmu.edu.bd/assets/images/mujib_logo.png" width="10%" />
-                </div>
-                <h3>Welcome to Hospitas Bd</h3>
-            </header>
-
-            <body>
-                <Button variant='contained' onClick={handleRegister} style={{margin:"20px"}}>Register</Button>
-                <Button variant='contained' onClick={handleSingin} style={{margin:"20px"}}>Singin</Button>
-            </body>
-
-
-        </div>
+            </div>
+        </>
     )
 }

@@ -1,6 +1,6 @@
 import { Button, TextField } from '@mui/material'
 import { Box } from '@mui/system'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../pages/Home.css'
 import { useNavigate } from 'react-router-dom'
 import '../pages/Register.css'
@@ -20,32 +20,37 @@ const Register: React.FC = () => {
         Email: '',
         password: ''
     })
-
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const { name, value } = event.target
         setAdmin({ ...admin, [name]: value })
+        console.log(admin)
     }
 
-    const handleSubmit = async(e: any) => {
-        
+    useEffect(()=>{
+
+    },[])
+
+    const handleSubmit = async() => {
         try {
             const response=await fetch('http://localhost:3001/register',{
             method:'POST',
             headers:{"Content-Type" : "application/json"},
             body:JSON.stringify(admin)
         })
-        console.log(response)
+        const resp=await response.json()
+        if(!resp.data){
+            console.log('not complete')
+        }else{
+            navigate('/')
+        }
+        
         } catch (error) {
-            console.log(error)
+            console.log('Please Fill The Input Filed',error)
         }
     }
     return (
         <div className='register'>
-            <header className='header'>
-                <img src="https://www.bsmmu.edu.bd/assets/images/mujib_logo.png" width="10%"></img>
-                <h3>Register</h3>
-            </header>
-
+        <p></p>
             <Box>
                 <div>
                     <TextField
@@ -96,11 +101,8 @@ const Register: React.FC = () => {
                         style={{ margin: "20px" }}
                         type='submit'
                     >Register</Button>
-                    <form action="../../register" method="post"
-                        className="form">
-                        <button type="submit">Register User?</button>
-                    </form>
                 </div>
+                
             </Box>
 
         </div>
