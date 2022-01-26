@@ -1,4 +1,5 @@
 const Joi=require('joi')
+const createError=require('http-errors')
 
 const schema=Joi.object({
     Email:Joi.string()
@@ -13,8 +14,7 @@ const userSingValidator=async(req,res,next)=>{
         await schema.validateAsync(req.body)
         return next()
     } catch (err:any) {
-        console.log('Invadid name or password')
-        return next(err)
+        return next(new createError.BadRequest(err.message))
     }
 }
 export default userSingValidator

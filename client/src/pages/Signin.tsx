@@ -8,6 +8,11 @@ interface SingInUser{
     password:string
 }
 
+interface Data{
+    data:{
+        msg:string
+    }
+}
 const Signin:React.FC = () => {
 
     const navigate=useNavigate()
@@ -16,6 +21,8 @@ const Signin:React.FC = () => {
         Email:'',
         password:''
     })
+
+    const [data,setData]=useState<Data>()
 
     const handleChange=(event:React.ChangeEvent<HTMLTextAreaElement>)=>{
         try {
@@ -34,9 +41,13 @@ const Signin:React.FC = () => {
                 headers:{"Content-Type":"application/json"},
                 body:JSON.stringify(user)
             })
+
+            
             const resp=await resData.json()
 
-            console.log(resp)
+            setData(resp)
+
+            console.log('this is send and response data',resp)
         } catch (err:any) {
             console.error(err.message)
         }
@@ -75,6 +86,9 @@ const Signin:React.FC = () => {
                 />
             </div>  
             <Button variant='contained' onClick={handleLogin}>Login</Button>  
+            <div>
+                <p>{data?.data.msg}</p>
+            </div>
         </div>
     )
 }

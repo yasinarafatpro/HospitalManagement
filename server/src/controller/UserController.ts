@@ -1,6 +1,7 @@
 import { getRepository } from "typeorm";
 import { User } from "../entities/User";
 const bycript=require('bcrypt')
+const createError=require('http-errors')
 
 const UserRegistration=async(req,res,next)=>{
     try {
@@ -9,18 +10,14 @@ const UserRegistration=async(req,res,next)=>{
     newUser.Email=req.body.Email,
     newUser.password=await bycript.hash(req.body.password,10000)
 
-    const saveuser=await getRepository(User).save(newUser)
+    const saveUser=await getRepository(User).save(newUser)
     res.status(201).send({
-        message:{
-            msg:'Complete'
-        },
-        data:{
-            name:saveuser.Name,
-            email:saveuser.Email
-        }
+       data:{
+           User:saveUser.Name
+       }
     });
-    } catch (error) {
-        console.log('error....')
+    } catch (error:any) {
+        return next(createError.BadRequest(error.message))
+        }
     }
-}
 export default UserRegistration

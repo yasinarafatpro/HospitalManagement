@@ -1,4 +1,5 @@
 const Joi = require('joi')
+const createError=require('http-errors')
 
 const schema = Joi.object({
     Name: Joi.string()
@@ -14,16 +15,13 @@ const schema = Joi.object({
 
 })
 
-const userLoginValidator=async(req,res,next)=>{
+const userLoginValidator=async(req:any,res:any,next:any)=>{
     try {
         await schema.validateAsync(req.body)
         return next()
         
-    } catch (error) {
-        res.send({
-           message:error
-        })
-        return next(error)
-    }
+    } catch (error:any) {
+        return next(createError.BadRequest(error.message))
+}
 }
 export default userLoginValidator

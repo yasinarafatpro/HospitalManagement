@@ -2,10 +2,11 @@ import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Auth from './pages/Auth';
 import { Home } from './pages/Home';
+import HospitalList from './pages/HospitalList';
 
 import Register from './pages/Register';
 import Signin from './pages/Signin';
-const Hospitals=React.lazy(()=>import('./pages/Register'))
+const Hospitals=React.lazy(()=>import('./pages/Hospitals'))
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path='/auth' element={<Auth />} />
               <Route path='/signin' element={<Signin />} />
               <Route path='/hospitals' element={<Hospitals />} />
+              <Route path='/hospitallist' element={<HospitalList/>}/>
             </Routes>
           </BrowserRouter>
           </Suspense>
