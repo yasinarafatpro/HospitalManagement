@@ -28,9 +28,8 @@ const Signin:React.FC = () => {
         try {
             const {name,value}=event.target
             setUser({...user,[name]:value})
-            console.log(user)
         } catch (err:any) {
-            console.error(err.message)
+            console.error('Front end Validaton error',err.message)
         }
 
     }

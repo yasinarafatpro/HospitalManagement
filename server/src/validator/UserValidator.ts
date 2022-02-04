@@ -21,6 +21,7 @@ const userLoginValidator=async(req:any,res:any,next:any)=>{
         return next()
         
     } catch (error:any) {
+        res.send(error.message)
         return next(createError.BadRequest(error.message))
 }
 }

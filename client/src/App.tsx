@@ -1,8 +1,10 @@
+import { Button, Stack } from '@mui/material';
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Auth from './pages/Auth';
 import { Home } from './pages/Home';
 import HospitalList from './pages/HospitalList';
+import HospitalRegister from './pages/HospitalRegister';
 
 import Register from './pages/Register';
 import Signin from './pages/Signin';
@@ -33,14 +35,16 @@ function App() {
               <Route path='/signin' element={<Signin />} />
               <Route path='/hospitals' element={<Hospitals />} />
               <Route path='/hospitallist' element={<HospitalList/>}/>
+              <Route path='/hospitalregister' element={<HospitalRegister/>}/>
             </Routes>
           </BrowserRouter>
           </Suspense>
-          <form action="../../post" method="post"
-            className="form">
-            <button type="submit">Connected to React?</button>
-          </form>
         </header>
+      </div>
+      <div className='homebtn'>
+        <form action="../../post" method="post">
+            <Button type="submit" variant='contained' style={{ margin: "20px" }}>Go Home</Button>
+        </form>
       </div>
     </>
   );
