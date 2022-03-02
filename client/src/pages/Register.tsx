@@ -13,12 +13,16 @@ export interface Admin {
 
 interface Data {
     data: {
-        User:string
+        name: string | null
 
     }
 }
-interface Error{
-
+interface Error {
+    error: {
+        name: {
+            message: string
+        }
+    }
 }
 const Register: React.FC = () => {
 
@@ -31,57 +35,61 @@ const Register: React.FC = () => {
     })
 
     const [data, setData] = useState<Data>()
-    const[loading,setLoading]=useState(true)
-    const [completing,setCompleting]=useState(false)
+    const [error, setError] = useState<Error>()
+    const [completing, setCompleting] = useState(false)
 
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const { name, value } = event.target
         setAdmin({ ...admin, [name]: value })
+        event.preventDefault()
     }
 
-    useEffect(()=>{
-        fetch('http://localhost:3001/register')
-        .then(res=>res.json())
-        .then(res=>setData(res))
-        .catch(error=>console.log(error))
-        .finally(()=>setLoading(false))
-    },[])
+    // useEffect(() => {
+    //     fetch('http://localhost:3001/register')
+    //         .then(res => res.json())
+    //         .then(res => setData(res))
+    //         .catch(error => console.log(error))
+    //     // console.log('useEffect',data)
+    // }, [data])
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e: any) => {
+        const { Name, Email, password } = admin
         try {
-            setCompleting(true)
-            const response = await fetch('http://localhost:3001/register', {
-                method: 'POST',
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(admin)
-            })
-            setCompleting(false)
-            const resp = await response.json()
-            setData(resp)
-            if(resp)
-               {
-                navigate('/hospitals')
-               }else{
-                   navigate('/register')
-               }
-            
-        } catch (error) {
-            console.log('Please Fill The Input Filed', error)
+            if (Name && Email && password) {
+                setCompleting(true)
+                const response = await fetch('http://localhost:3001/register', {
+                    method: 'POST',
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(admin)
+                })
+                setCompleting(false)
+                const resp = await response.json()
+                setData(resp)
+                
+            } else {
+                alert('Invalid Text Field')
+            }
+        } catch (err: any) {
+            setError(error)
+            console.log('Input Filed', err)
         }
+        
     }
+
     return (
         <div className='register'>
             <div>
                 {completing && <h2>Completing...</h2>}
             </div>
+            <div>{error && <h2>{error.error.name.message}</h2>}</div>
             <div>
-                {loading && <h2>Loading...</h2>}
-                {data && <h3>Registration Completed </h3>}
-                {data && <h2>User Name: {data.data.User}</h2>}
+                {/* {data && <h3>Registration Completed </h3>} */}
+                {data && <h3>{data?.data.name}</h3>}
+                {/* {error && <h2>{error.error.name.message}</h2>} */}
             </div>
             <Box>
                 <div>
-                    
+
                     <TextField
                         name='Name'
                         value={admin.Name}
@@ -93,7 +101,9 @@ const Register: React.FC = () => {
                         id='Name'
                         required
                         onChange={handleChange}
+                        error={true}
                     />
+                    {error?.error.name.message}
                 </div>
                 <div>
                     <TextField
@@ -106,6 +116,7 @@ const Register: React.FC = () => {
                         autoComplete='email'
                         required
                         onChange={handleChange}
+                        error={true}
                     />
                 </div>
                 <div>
@@ -120,6 +131,7 @@ const Register: React.FC = () => {
                         autoComplete='current-password'
                         required
                         onChange={handleChange}
+                        error={true}
                     />
                 </div>
                 <div>
@@ -128,7 +140,7 @@ const Register: React.FC = () => {
                         onClick={handleSubmit}
                         style={{ margin: "20px" }}
                         type='submit'
-                     >Register</Button>
+                    >Register</Button>
                 </div>
             </Box>
 

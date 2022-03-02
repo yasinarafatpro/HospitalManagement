@@ -9,7 +9,6 @@ const schema = Joi.object({
 
     Email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }),
-
     password: Joi.string()
         .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
 
@@ -19,9 +18,12 @@ const userLoginValidator=async(req:any,res:any,next:any)=>{
     try {
         await schema.validateAsync(req.body)
         return next()
-        
     } catch (error:any) {
-        res.send(error.message)
+        res.send({
+            error:{
+                name:createError.BadRequest(error.message)
+            }
+        })
         return next(createError.BadRequest(error.message))
 }
 }

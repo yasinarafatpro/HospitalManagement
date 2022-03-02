@@ -10,10 +10,15 @@ const userLogin=async(req,res,next)=>{
         })
         const match=await bcrypt.compare(req.body.password,user.password)
         if(!match){
+            res.status(401).send({
+                error:{
+                    msg:'wrong password'
+                }
+            })
             return next(createError.BadRequest('Wrong Password'))
         }else{
             res.status(201).send({
-                user:{
+                data:{
                     Name:user.Name
                 }
             })

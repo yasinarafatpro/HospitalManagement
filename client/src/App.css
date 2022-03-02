@@ -24,6 +24,9 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.bangladesh-logo{
+  justify-content: flex-start;
+}
 
 .App-link {
   color: #61dafb;

@@ -4,6 +4,7 @@ import app from './src/app'
 import 'reflect-metadata'
 import {createConnection} from 'typeorm'
 import { User } from './src/entities/User'
+import { Hospitals } from './src/entities/Hospitals'
 
 const server=http.createServer(app);
 
@@ -15,7 +16,7 @@ const server=http.createServer(app);
         username:'postgres',
         password:'12',
         database:'hospitalsdb',
-        entities:[User],
+        entities:[User,Hospitals],
         synchronize:true,
         logging:false
     })
