@@ -1,36 +1,22 @@
-import { AppBar, Button, Container, IconButton, MenuItem, Toolbar, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import {Button, Container} from '@mui/material';     
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import SearchAppBar from './pages/AppBar';
 import  {Home}  from './pages/Home';
 import HospitalList from './pages/HospitalList';
 import HospitalRegister from './pages/HospitalRegister';
+import Photo from './pages/Photo';
 import Register from './pages/Register';
 import Signin from './pages/Signin';
-import { color, textAlign } from '@mui/system';
+
 const Hospitals = React.lazy(() => import('./pages/Hospitals'))
 
 function App() {
   return (
     <>
-      <Container >
+    <SearchAppBar/>
+      <Container sx={{marginY:5}}>
         <div className="App">
-          <AppBar position='absolute'>
-            <Toolbar>
-              <IconButton
-                size='large'
-                edge='start'
-
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography>
-                <img alt="logo" src="http://dmc.gov.bd/themes/responsive_npf/img/logo/logo.png" width='50%' />
-              </Typography>
-              <Button color='inherit'>LogIn</Button>
-            </Toolbar>
-          </AppBar>
-          <h2 style={{padding:'80px',textAlign: 'center',color:'blueviolet'}}>BD HOSPITALS</h2>
           <header className="App-header">
               <BrowserRouter>
                 <Routes>
@@ -41,6 +27,7 @@ function App() {
                   <Route path='/hospitals' element={<Hospitals />} />
                   <Route path='/hospitallist' element={<HospitalList />} />
                   <Route path='/hospitalregister' element={<HospitalRegister />} />
+                  <Route path='/photo' element={<Photo/>}/>
                 </Routes>
               </BrowserRouter>
           </header>

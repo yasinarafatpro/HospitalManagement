@@ -6,15 +6,9 @@ export class Hospitals {
     id: number;
 
     @Column()
-    HospitalName: string;
+    name: string;
 
     @Column()
-    password: string;
-
-    @Column()
-    HospitalCode:number
-
-    @Column()
-    Helper_text:string
+    code: string;
 
 }
