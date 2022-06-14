@@ -32,21 +32,6 @@ const storage=multer.diskStorage({
   }
 })
 
-const storage2=multer.diskStorage({
-  destination:(req,file,cb)=>{
-    cb(null,UPLOAD_FOLDER)
-  },
-  filename:(req,file,cb)=>{
-    const fileExt=path.extname(file.originalname);
-    const fileName=file.originalname
-                    .replace(fileExt,"")
-                    .toLowerCase()
-                    .split(" ")
-                    .join("-")+"-"+Date.now()
-    cb(null,fileName + fileExt)                
-  }
-})
-
 const upload = multer({
   storage: storage,
   limits: {
@@ -74,7 +59,7 @@ const upload = multer({
 })
 
 app.get('/', (req, res) => {
-  res.send('Hello Server')
+  res.send('Hello Hospital Server')
 })
 app.get('/register/singin', (req, res) => {
   res.send('get secure register sign')
@@ -88,7 +73,7 @@ app.post("/post", (req, res) => {
   res.redirect('/')
 });
 app.post("/register", userLoginValidator, UserRegistration, (req, res) => {
-  res.redirect('/signin')
+  res.send("registered")
 })
 app.post('/register/singin', userSingValidator, userLogin)
 

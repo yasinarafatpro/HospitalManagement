@@ -1,4 +1,4 @@
-import { Button, Stack, TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 
@@ -25,8 +25,7 @@ const HospitalRegister: React.FC = () => {
     console.log(hospital)
   }
 
-  const handleSubmit = async () => {
-    console.log(hospital)
+  const handleSubmit = async (e:any) => {
     try{
       const response=await fetch('http://localhost:3001/hospitalregister',{
         method:'POST',
@@ -34,20 +33,27 @@ const HospitalRegister: React.FC = () => {
         body:JSON.stringify(hospital)
       })
       const resp=await response.json()
+      Reset()
       console.log(resp)
 
     }catch(err){
       console.log(err)
     }
   }
+  const Reset=()=>{
+    setHospital({
+      name: '',
+      code: ''
+    })
+  }
   return (
     <div className='hospitalValue'>
-      <p style={{ textAlign: 'center' }}>Please Fill Required Field *</p>
+      <h4>Please Fill Required Field *</h4>
       <Box>
-        <TextField type='text' name='name' value={hospital.name} label='name of hospital' onChange={handleChange}/><br/>
-        <TextField type='munber' name='code' value={hospital.code} label='Code of hospital' onChange={handleChange}/><br/>
-
-        <Button variant='contained' type='submit' onClick={handleSubmit}>Submit</Button>
+        1.<TextField type='text' name='name' value={hospital.name} label='name of hospital' onChange={handleChange}/><br/>
+        2<TextField type='munber' name='code' value={hospital.code} label='Code of hospital' onChange={handleChange}/><br/>
+        <Button type='reset' onClick={Reset} variant='contained' style={{margin:'10px'}}>Reset</Button>
+        <Button variant='contained' type='submit' onClick={handleSubmit} style={{margin:'10px'}}>Submit</Button>
       </Box>
     </div>
   )

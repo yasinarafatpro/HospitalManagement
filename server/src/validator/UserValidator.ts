@@ -2,6 +2,8 @@ const Joi = require('joi')
 const createError=require('http-errors')
 
 const schema = Joi.object({
+    userRoll:Joi.string()
+            .required(),
     Name: Joi.string()
         .min(3)
         .max(30)
@@ -19,11 +21,6 @@ const userLoginValidator=async(req:any,res:any,next:any)=>{
         await schema.validateAsync(req.body)
         return next()
     } catch (error:any) {
-        res.send({
-            error:{
-                name:createError.BadRequest(error.message)
-            }
-        })
         return next(createError.BadRequest(error.message))
 }
 }

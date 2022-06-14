@@ -1,11 +1,11 @@
-import { Button, TextField } from '@mui/material'
+import { Button, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useEffect, useState } from 'react'
 import '../pages/Home.css'
-import { useNavigate } from 'react-router-dom'
 import '../pages/Register.css'
 
 export interface Admin {
+    Role:string,
     Name: string,
     Email: string,
     password: string
@@ -26,15 +26,17 @@ interface Error {
 }
 const Register: React.FC = () => {
 
-    const navigate = useNavigate()
+    
 
     const [admin, setAdmin] = useState<Admin>({
+        Role:'',
         Name: '',
         Email: '',
         password: ''
     })
 
     const [data, setData] = useState<Data>()
+    
     const [error, setError] = useState<Error>()
     const [completing, setCompleting] = useState(false)
 
@@ -53,9 +55,9 @@ const Register: React.FC = () => {
     // }, [data])
 
     const handleSubmit = async (e: any) => {
-        const { Name, Email, password } = admin
+        const {Role, Name, Email, password } = admin
         try {
-            if (Name && Email && password) {
+            if (Role && Name && Email && password) {
                 setCompleting(true)
                 const response = await fetch('http://localhost:3001/register', {
                     method: 'POST',
@@ -75,7 +77,15 @@ const Register: React.FC = () => {
         }
         
     }
-
+    const Reset=()=>{
+        setAdmin({
+            Role:'',
+            Name: '',
+            Email: '',
+            password: ''
+        })
+    }
+    console.log(admin)
     return (
         <div className='register'>
             <div>
@@ -89,7 +99,18 @@ const Register: React.FC = () => {
             </div>
             <Box>
                 <div>
-
+                    <InputLabel>Your Role</InputLabel>
+                    <Select
+                    labelId='userRole'
+                    id='role'
+                    label='Role'
+                    value={admin.Role}
+                    error={true}
+                    onChange={(e:SelectChangeEvent)=>handleChange}
+                    >
+                    <MenuItem value='Admin'>Admin</MenuItem>
+                    <MenuItem value='Basic'>Basic</MenuItem>
+                    </Select><br/>
                     <TextField
                         name='Name'
                         value={admin.Name}
@@ -135,10 +156,11 @@ const Register: React.FC = () => {
                     />
                 </div>
                 <div>
+                    <Button variant='contained' onClick={Reset} style={{margin:"10px"}}>Reset</Button>
                     <Button
                         variant='contained'
                         onClick={handleSubmit}
-                        style={{ margin: "20px" }}
+                        style={{ margin: "10px" }}
                         type='submit'
                     >Register</Button>
                 </div>

@@ -1,4 +1,4 @@
-import { getRepository } from "typeorm";
+import { getCustomRepository, getRepository } from "typeorm";
 import { User } from "../entities/User";
 const bycript = require('bcrypt')
 const createError = require('http-errors')
@@ -6,9 +6,11 @@ const createError = require('http-errors')
 const UserRegistration = async (req, res, next) => {
     try {
         const newUser = new User();
-            newUser.Name = req.body.Name,
-            newUser.Email = req.body.Email,
-            newUser.password = await bycript.hash(req.body.password, 10000);
+        const {userRoll,Name,Email,password}=req.body
+            newUser.userRoll=userRoll,
+            newUser.Name =Name,
+            newUser.Email =Email,
+            newUser.password = await bycript.hash(password, 10000);
         // const emailUser=await getRepository(User).findOneOrFail({
         //     Email:req.body.Email
         // })

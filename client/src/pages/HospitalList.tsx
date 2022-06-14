@@ -12,13 +12,15 @@ import { AccessTime } from '@mui/icons-material';
 const HospitalList: React.FC = () => {
 
     const navigate = useNavigate()
+
     return (
         <div>
-            <div >
-                <Grid container spacing={3}>
+            <div>
+                <Box>
+                <Grid container spacing={3} style={{cursor:'pointer'}} maxWidth='large'>
                     <Grid item xs={3} >
                         <Paper elevation={3}>
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQySz5jKMKf2MWyXiR_kcLLcckTMaz1xK4hEA&usqp=CAU" className='img' />
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQySz5jKMKf2MWyXiR_kcLLcckTMaz1xK4hEA&usqp=CAU" className='img' alt='text'/>
                             <Box paddingX={1}>
                                 <Typography variant='subtitle1'>
                                     Shekhhasina Medical College
@@ -67,7 +69,7 @@ const HospitalList: React.FC = () => {
                     </Grid>
                     <Grid item xs={3}>
                         <Paper elevation={3}>
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyuHsO3M74ZFqFJIVKq2h3W3SL65S1YeETBg&usqp=CAU" className='img' />
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyuHsO3M74ZFqFJIVKq2h3W3SL65S1YeETBg&usqp=CAU" className='img' alt='text'/>
                             <Box paddingX={1}>
                                 <Typography variant='subtitle1'>
                                     Dhaka Medical College
@@ -116,7 +118,7 @@ const HospitalList: React.FC = () => {
                     </Grid>
                     <Grid item xs={3}>
                         <Paper elevation={3}>
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO-yfdxWGlvmsZrGLArkEyJzuUOF43G_UFIA&usqp=CAU" className='img' />
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO-yfdxWGlvmsZrGLArkEyJzuUOF43G_UFIA&usqp=CAU" className='img' alt='text'/>
                             <Box paddingX={1}>
                                 <Typography variant='subtitle1'>
                                     Chottogram Medical College
@@ -165,7 +167,7 @@ const HospitalList: React.FC = () => {
                     </Grid>
                     <Grid item xs={3}>
                         <Paper elevation={3}>
-                            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0rarM9V28hOnv9NSjiQCIwTzd_-WKbJ0MjA&usqp=CAU' className='img' />
+                            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0rarM9V28hOnv9NSjiQCIwTzd_-WKbJ0MjA&usqp=CAU' className='img' alt='text'/>
                             <Box paddingX={1}>
                                 <Typography>
                                     Ragshahi Medical Collage
@@ -201,18 +203,16 @@ const HospitalList: React.FC = () => {
                     </Grid>
                     <Grid item xs={3}>
                         <Paper elevation={3}>
-                            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlCeVhPcF0B061dWx6Y2p6ZshztnAoVQI59g&usqp=CAU' className='img' />
+                            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlCeVhPcF0B061dWx6Y2p6ZshztnAoVQI59g&usqp=CAU' className='img' alt='text'/>
                         </Paper>
                     </Grid>
                     <Grid item xs={3}>
                         <Paper elevation={3}>
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVGHL9r9OucwArH8yO3rEDPryG4V3tSCBw-w&usqp=CAUfavicon.ico" className='img' />
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVGHL9r9OucwArH8yO3rEDPryG4V3tSCBw-w&usqp=CAUfavicon.ico" className='img' alt='text'/>
                         </Paper>
                     </Grid>
                 </Grid>
-            </div>
-            <div>
-                <Button variant="contained" onClick={() => { navigate('/hospitalregister') }}>Add Hospitals</Button>
+                </Box>
             </div>
         </div>
     )
